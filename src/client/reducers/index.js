@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
 import usersReducer from './usersReducer';
+import RickMortyReducer from './rickMortyReducer';
 
 export default combineReducers({
-    users: usersReducer
+    users: usersReducer,
+    rickMorty: RickMortyReducer
 })

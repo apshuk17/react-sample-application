@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import axios from "axios";
 import { connect } from "react-redux";
+import User from "../../components/presentational/User/user";
 import { fetchUsers } from "../../actions";
 
 const UsersList = ({ users, fetchUsers }) => {
@@ -9,12 +9,12 @@ const UsersList = ({ users, fetchUsers }) => {
   }, []);
   const [usersData] = users;
   return (
-    <div>
+    <>
       <h1>Here's a list of users.</h1>
       {usersData?.map(({ id, name }) => {
-        return <div key={id}>{name}</div>;
+        return <User key={id} name={name}></User>;
       })}
-    </div>
+    </>
   );
 };
 
@@ -22,4 +22,9 @@ const mapStateToProps = ({ users }) => ({
   users,
 });
 
-export default connect(mapStateToProps, { fetchUsers })(UsersList);
+export const loadData = (store) => store.dispatch(fetchUsers());
+
+export default {
+  component: connect(mapStateToProps, { fetchUsers })(UsersList),
+  loadData,
+};
