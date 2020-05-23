@@ -4,7 +4,7 @@ import Grid from "@material-ui/core/Grid";
 export const LayoutContainer = styled.div`
   ${() => css`
     max-width: 1280px;
-    margin: 0 auto;
+    margin: 88px auto 0;
   `};
 `;
 

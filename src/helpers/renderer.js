@@ -40,6 +40,7 @@ const renderer = (req, store) => {
                 <style>
                 body {
                   font-family: 'Roboto', sans-serif;
+                  margin: 0;
                 }
                 </style>
                 <style id="jss-server-side">${MUISTYLES}</style>
