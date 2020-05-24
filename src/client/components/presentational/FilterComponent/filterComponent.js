@@ -2,8 +2,9 @@ import React from "react";
 import Typography from "@material-ui/core/Typography";
 import Checkbox from "@material-ui/core/Checkbox";
 import FilterComponentWrapper from "./filterComponent.style";
+import {} from '../../../actions/'
 
-const FilterComponent = ({ filterComp }) => {
+const FilterComponent = ({ filterComp, filterTrigger }) => {
   const { name, values } = filterComp;
   return (
     <FilterComponentWrapper>
@@ -16,7 +17,7 @@ const FilterComponent = ({ filterComp }) => {
           values.map(({ label, checked }) => {
             return (
               <div key={label} className="checkbox-with-label">
-                <Checkbox color="primary" checked={checked} />
+                <Checkbox onChange={() => filterTrigger(name, label, !checked)} color="primary" checked={checked} />
                 <span>{label}</span>
               </div>
             );

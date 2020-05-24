@@ -19,11 +19,11 @@ const ImageCard = ({ data }) => {
         </Typography>
         <Typography variant="body2" color="textSecondary" component="p">
           <span className="image-text-status">ORIGIN</span>
-          <span className="image-text-label">{data.origin.name}</span>
+          <span className="image-text-label">{data?.origin?.name}</span>
         </Typography>
         <Typography variant="body2" color="textSecondary" component="p">
           <span className="image-text-status">LAST LOCATION</span>
-          <span className="image-text-label">{data.location.name}</span>
+          <span className="image-text-label">{data?.location?.name}</span>
         </Typography>
       </CardContent>
     </ImageCardWrapper>
