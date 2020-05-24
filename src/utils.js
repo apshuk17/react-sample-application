@@ -4,7 +4,7 @@ export const getAllFilterValues = (
   fieldToFilter,
   subField
 ) => {
-  const output = input.reduce((acc, item) => {
+  const output = input?.reduce((acc, item) => {
     const itemToBeFiltered = subField
       ? item[fieldToFilter][subField]
       : item[fieldToFilter];
@@ -13,7 +13,7 @@ export const getAllFilterValues = (
     }
     return acc;
   }, []);
-  const updatedOutput = output.map((item) => {
+  const updatedOutput = output?.map((item) => {
     if (filterTerms?.length > 0) {
       const filterTerm = filterTerms.find(
         (filterItem) => filterItem.name === fieldToFilter

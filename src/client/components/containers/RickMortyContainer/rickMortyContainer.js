@@ -13,6 +13,7 @@ const RickMortyContainer = ({
   gender,
   origin,
   filterReset,
+  dataLoading,
 }) => {
   useEffect(() => {
     fetchRickMortyData();
@@ -24,7 +25,7 @@ const RickMortyContainer = ({
       gender={gender}
       origin={origin}
       filterTrigger={filterTrigger}
-      noResults={!(rickMortyDataResultSet.length > 0)}
+      noResults={dataLoading === 'DONE' && !(rickMortyDataResultSet?.length > 0)}
       filterReset={filterReset}
     />
   );
@@ -32,7 +33,7 @@ const RickMortyContainer = ({
 
 const loadData = (store) => store.dispatch(fetchRickMortyData());
 
-const mapStateToProps = ({ rickMorty, filterTerms }) => ({
+const mapStateToProps = ({ rickMorty, filterTerms, dataLoading }) => ({
   rickMortyDataResultSet: getFilteredData(
     rickMorty?.showData?.results,
     filterTerms
@@ -53,10 +54,11 @@ const mapStateToProps = ({ rickMorty, filterTerms }) => ({
     'origin',
     'name'
   ),
+  dataLoading,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchRickMortyData,
+  fetchRickMortyData: () => dispatch(fetchRickMortyData()),
   filterTrigger: (filterType, filterValue, checkedState) =>
     dispatch(triggerFilter(filterType, filterValue, checkedState)),
   filterReset: () => dispatch(resetFilter()),

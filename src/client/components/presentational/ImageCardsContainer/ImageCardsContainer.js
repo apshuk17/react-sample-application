@@ -5,7 +5,7 @@ import ImageCardsWrapper from "./ImageCardsContainer.style";
 const ImageCardsContainer = ({ rickMortyData }) => {
   return (
     <ImageCardsWrapper container spacing={2}>
-      {rickMortyData.map((data) => {
+      {rickMortyData?.map((data) => {
         return <ImageCard key={data.id} data={data}  />;
       })}
     </ImageCardsWrapper>

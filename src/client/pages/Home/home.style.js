@@ -2,8 +2,7 @@ import styled, { css } from 'styled-components';
 
 export const HomeComponentWrapper = styled.div`
     ${() => css`
-        h1 {
-            color: red;
-        }
+        margin: 88px auto 0 auto;
+        max-width: 1280px;
     `};
 `;
