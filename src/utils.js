@@ -32,6 +32,11 @@ export const getAllFilterValues = (
   return { name: fieldToFilter, values: updatedOutput };
 };
 
+export const getformattedDate = (dateInput) => {
+  const date = new Date(dateInput);
+  return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+};
+
 export const isNoItemChecked = (filteredData) => {
   if (filteredData.length > 0) {
     const checkedStatus = filteredData.reduce((acc, { name, values }) => {
