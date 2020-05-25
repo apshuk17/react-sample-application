@@ -8,6 +8,9 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { Link } from 'react-router-dom';
 import { HeaderWrapper } from './header.style';
+import SearchBox from '../SearchBox/searchBox';
+import Button from '@material-ui/core/Button';
+import SearchIcon from '@material-ui/icons/Search';
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = React.useState(null);
@@ -46,9 +49,20 @@ const Header = () => {
               <Link to="/rick-morty">Shows</Link>
             </MenuItem>
           </Menu>
-          <Typography variant="h6" noWrap>
+          <Typography className="app-title" variant="h6" noWrap>
             Rick Morty
           </Typography>
+          <div className="search-header-wrapper">
+            <SearchBox />
+            <Button
+              onClick={() => console.log('Clicked')}
+              className="search-btn"
+              variant="contained"
+              color="primary"
+            >
+              <SearchIcon />
+            </Button>
+          </div>
         </Toolbar>
       </AppBar>
     </HeaderWrapper>

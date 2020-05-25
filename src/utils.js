@@ -32,8 +32,24 @@ export const getAllFilterValues = (
   return { name: fieldToFilter, values: updatedOutput };
 };
 
+export const isNoItemChecked = (filteredData) => {
+  if (filteredData.length > 0) {
+    const checkedStatus = filteredData.reduce((acc, { name, values }) => {
+      const itemCheckedStatus = values.map(({ label, checked }) => checked);
+      acc.push(...itemCheckedStatus);
+      return acc;
+    }, []);
+    if (checkedStatus.includes(true)) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+  return true;
+};
+
 export const getFilteredData = (actualStateData, filterStateData) => {
-  if (filterStateData.length > 0) {
+  if (filterStateData.length > 0 && !isNoItemChecked(filterStateData)) {
     const refactoredFilterStateData = filterStateData.map((filterItem) => {
       const onlyCheckedData = filterItem.values.map((valueItem) => {
         if (valueItem.checked) {

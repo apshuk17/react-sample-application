@@ -2,8 +2,13 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fetchRickMortyData } from '../../../actions';
 import TwoColumnTemplateLayout from '../../templates/twocolumntemplate';
-import { getAllFilterValues, getFilteredData } from '../../../../utils';
+import {
+  getAllFilterValues,
+  getFilteredData,
+  isNoItemChecked,
+} from '../../../../utils';
 import { triggerFilter, resetFilter } from '../../../actions/filterActions';
+import { noItemChecked } from '../../../actions/dataLoadingActions';
 
 const RickMortyContainer = ({
   rickMortyDataResultSet,
@@ -14,6 +19,7 @@ const RickMortyContainer = ({
   origin,
   filterReset,
   dataLoading,
+  isNoItemChecked
 }) => {
   useEffect(() => {
     fetchRickMortyData();
@@ -25,7 +31,11 @@ const RickMortyContainer = ({
       gender={gender}
       origin={origin}
       filterTrigger={filterTrigger}
-      noResults={dataLoading === 'DONE' && !(rickMortyDataResultSet?.length > 0)}
+      noResults={
+        dataLoading === 'DONE' &&
+        !isNoItemChecked &&
+        !(rickMortyDataResultSet?.length > 0)
+      }
       filterReset={filterReset}
     />
   );
@@ -33,7 +43,7 @@ const RickMortyContainer = ({
 
 const loadData = (store) => store.dispatch(fetchRickMortyData());
 
-const mapStateToProps = ({ rickMorty, filterTerms, dataLoading }) => ({
+const mapStateToProps = ({ rickMorty, filterTerms, dataLoading, isNoFilterItemChecked }) => ({
   rickMortyDataResultSet: getFilteredData(
     rickMorty?.showData?.results,
     filterTerms
@@ -55,13 +65,14 @@ const mapStateToProps = ({ rickMorty, filterTerms, dataLoading }) => ({
     'name'
   ),
   dataLoading,
+  isNoItemChecked: isNoItemChecked(filterTerms),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   fetchRickMortyData: () => dispatch(fetchRickMortyData()),
   filterTrigger: (filterType, filterValue, checkedState) =>
     dispatch(triggerFilter(filterType, filterValue, checkedState)),
-  filterReset: () => dispatch(resetFilter()),
+  filterReset: () => dispatch(resetFilter())
 });
 
 export default {
